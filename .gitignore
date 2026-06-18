@@ -1,0 +1,22 @@
+# Dependências
+node_modules/
+
+# Banco de dados local
+*.db
+*.db-shm
+*.db-wal
+
+# Ambiente
+.env
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Imagens soltas (não fazem parte do sistema)
+WhatsApp Image*.jpeg
+WhatsApp Image*.jpg
+7c24eabd-*.jpg

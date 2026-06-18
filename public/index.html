@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quinta Categoria F.C.</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <img src="/assets/escudo.jpg" alt="Escudo Quinta Categoria F.C." class="escudo">
+      <div class="header-text">
+        <h1>Quinta Categoria F.C.</h1>
+        <p>Sistema de Rachas</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <button class="nav-btn active" data-view="jogadores">⚽ Jogadores</button>
+    <button class="nav-btn" data-view="novo-racha">➕ Novo Racha</button>
+    <button class="nav-btn" data-view="historico">📋 Histórico</button>
+  </nav>
+
+  <main class="main">
+    <!-- VIEW: Jogadores -->
+    <section id="view-jogadores" class="view active">
+      <div class="view-header">
+        <h2>Jogadores</h2>
+        <button class="btn btn-gold" id="btn-novo-jogador">+ Novo Jogador</button>
+      </div>
+
+      <div id="form-jogador-container" class="form-card hidden">
+        <h3 id="form-jogador-titulo">Novo Jogador</h3>
+        <form id="form-jogador">
+          <input type="hidden" id="jogador-id">
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Nome *</label>
+              <input type="text" id="jogador-nome" required maxlength="60" placeholder="Nome do jogador">
+            </div>
+            <div class="form-group">
+              <label>⚽ Posição Principal</label>
+              <select id="posicao-principal">
+                <option value="">Selecionar posição...</option>
+                <option value="goleiro">Goleiro</option>
+                <option value="zagueiro">Zagueiro</option>
+                <option value="meia">Meia</option>
+                <option value="atacante">Atacante</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Posição Secundária <small class="attr-hint">opcional</small></label>
+              <select id="posicao-secundaria" disabled>
+                <option value="">—</option>
+                <option value="goleiro">Goleiro</option>
+                <option value="zagueiro">Zagueiro</option>
+                <option value="meia">Meia</option>
+                <option value="atacante">Atacante</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Posição Terciária <small class="attr-hint">opcional</small></label>
+              <select id="posicao-terciaria" disabled>
+                <option value="">—</option>
+                <option value="goleiro">Goleiro</option>
+                <option value="zagueiro">Zagueiro</option>
+                <option value="meia">Meia</option>
+                <option value="atacante">Atacante</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>💪 Físico <small class="attr-hint">resistência / força</small> <span id="fisico-display" class="slider-display">5</span></label>
+              <input type="range" id="fisico" min="0" max="10" step="1" value="5" class="slider">
+            </div>
+            <div class="form-group">
+              <label>⚡ Ataque <small class="attr-hint">finalização / movimentação</small> <span id="ataque-display" class="slider-display">5</span></label>
+              <input type="range" id="ataque" min="0" max="10" step="1" value="5" class="slider">
+            </div>
+            <div class="form-group">
+              <label>🛡 Defesa <small class="attr-hint">desarme / posicionamento def.</small> <span id="defesa-display" class="slider-display">5</span></label>
+              <input type="range" id="defesa" min="0" max="10" step="1" value="5" class="slider">
+            </div>
+            <div class="form-group">
+              <label>⚽ Técnica <small class="attr-hint">controle / passe / drible</small> <span id="tecnica-display" class="slider-display">5</span></label>
+              <input type="range" id="tecnica" min="0" max="10" step="1" value="5" class="slider">
+            </div>
+            <div class="form-group">
+              <label>🧠 Tática <small class="attr-hint">posicionamento / leitura de jogo</small> <span id="tatica-display" class="slider-display">5</span></label>
+              <input type="range" id="tatica" min="0" max="10" step="1" value="5" class="slider">
+            </div>
+            <div class="form-group">
+              <label>⚡ Velocidade <small class="attr-hint">explosão / aceleração / sprint</small> <span id="velocidade-display" class="slider-display">5</span></label>
+              <input type="range" id="velocidade" min="0" max="10" step="1" value="5" class="slider">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-gold" id="btn-salvar-jogador">Salvar</button>
+            <button type="button" class="btn btn-ghost" id="btn-cancelar-jogador">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="lista-jogadores" class="jogadores-grid"></div>
+    </section>
+
+    <!-- VIEW: Novo Racha -->
+    <section id="view-novo-racha" class="view">
+      <h2>Novo Racha</h2>
+      <form id="form-racha">
+        <div class="form-card">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nome do Racha *</label>
+              <input type="text" id="racha-nome" required placeholder="Ex: Racha 18/06">
+            </div>
+            <div class="form-group">
+              <label>Data *</label>
+              <input type="date" id="racha-data" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Goleiros (1 por time)</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="label-time-a">🟤 Goleiro — Time Branco (A)</label>
+              <select id="goleiro-a" required>
+                <option value="">Selecionar goleiro...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="label-time-b">⚫ Goleiro — Time Preto (B)</label>
+              <select id="goleiro-b" required>
+                <option value="">Selecionar goleiro...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="label-time-c">🟡 Goleiro — Time Dourado (C)</label>
+              <select id="goleiro-c" required>
+                <option value="">Selecionar goleiro...</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="selecao-header">
+            <h3>Jogadores de Linha</h3>
+            <span id="contador-jogadores" class="contador">0 / 18 selecionados</span>
+          </div>
+          <p class="hint">Selecione exatamente 18 jogadores de linha. Jogadores com posição Goleiro e os goleiros designados acima são excluídos automaticamente.</p>
+          <div id="lista-selecao-jogadores" class="selecao-grid"></div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-gold btn-lg">⚽ Criar Racha e Gerar Times</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- VIEW: Histórico -->
+    <section id="view-historico" class="view">
+      <h2>Histórico de Rachas</h2>
+      <div id="lista-historico"></div>
+    </section>
+
+    <!-- VIEW: Resultado -->
+    <section id="view-resultado" class="view">
+      <div class="resultado-header">
+        <div>
+          <h2 id="resultado-titulo">Times Gerados</h2>
+          <p id="resultado-subtitulo" class="hint"></p>
+        </div>
+        <div class="resultado-acoes">
+          <button class="btn btn-gold" id="btn-regenerar">🔄 Regenerar Times</button>
+          <button class="btn btn-ghost" id="btn-voltar-historico">← Histórico</button>
+        </div>
+      </div>
+      <div id="times-container" class="times-grid"></div>
+    </section>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

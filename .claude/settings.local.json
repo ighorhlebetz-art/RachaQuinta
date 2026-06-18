@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ExecutionPolicy -List)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "PowerShell(& cmd.exe /c \"cd /d \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\"\" && npm init -y\")",
+      "PowerShell(& cmd.exe /c \"cd /d \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\"\" && npm install express better-sqlite3\")",
+      "PowerShell(& cmd.exe /c \"mkdir \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\assets\"\" && mkdir \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\server\"\" && mkdir \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\server\\\\routes\"\" && mkdir \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\public\"\" && mkdir \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\public\\\\css\"\" && mkdir \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\public\\\\js\"\"\")",
+      "PowerShell(& cmd.exe /c \"copy \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\7c24eabd-c20f-453b-85ea-2d4b4e5d50e3.jpg\"\" \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\assets\\\\escudo.jpg\"\" && copy \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\WhatsApp Image 2026-06-18 at 11.15.34.jpeg\"\" \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\assets\\\\time-branco.jpg\"\" && copy \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\WhatsApp Image 2026-06-18 at 11.15.34 \\(1\\).jpeg\"\" \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\assets\\\\time-preto.jpg\"\"\")",
+      "PowerShell(& cmd.exe /c \"cd /d \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\"\" && node server/index.js\")",
+      "PowerShell(& cmd.exe /c \"node -e \"\"const http=require\\('http'\\);function req\\(method,path,body,cb\\){const opts={hostname:'localhost',port:3000,path,method,headers:{'Content-Type':'application/json'}};const r=http.request\\(opts,res=>{let d='';res.on\\('data',c=>d+=c\\);res.on\\('end',\\(\\)=>cb\\(null,JSON.parse\\(d\\),res.statusCode\\)\\)}\\);r.on\\('error',cb\\);if\\(body\\)r.write\\(JSON.stringify\\(body\\)\\);r.end\\(\\)}; req\\('GET','/api/jogadores',null,\\(e,d,s\\)=>console.log\\('GET jogadores status:',s,'count:',Array.isArray\\(d\\)?d.length:d\\)\\)\"\"\")",
+      "PowerShell(& cmd.exe /c \"cd /d \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\"\" && node test-api.js\")",
+      "PowerShell(& cmd.exe /c \"del \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\test-api.js\"\" && del \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\rachas.db\"\"\")",
+      "PowerShell(Stop-Process -Name \"node\" -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(& cmd.exe /c \"del \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\test-api.js\"\" 2>nul & del \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\rachas.db\"\" 2>nul & echo Limpeza feita\")",
+      "Skill(run)",
+      "Skill(run:*)",
+      "PowerShell(& cmd.exe /c \"cd /d \"\"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\"\" && start /B node server/index.js > server.log 2>&1\")",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/api/jogadores\" -UseBasicParsing -ErrorAction SilentlyContinue)",
+      "PowerShell(Start-Process \"http://localhost:3000\")",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000\" -UseBasicParsing -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\" | Where-Object { $_.Name -ne \"node_modules\" } | Select-Object Name, PSIsContainer)",
+      "Bash(node -e ' *)",
+      "PowerShell(node --version)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/api/jogadores\" -UseBasicParsing | Select-Object StatusCode, @{N='TotalJogadores';E={\\($_.Content | ConvertFrom-Json\\).Count}})",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/styles.css\" -UseBasicParsing | Select-Object StatusCode, @{N='ContentType';E={$_.Headers.'Content-Type'}})",
+      "PowerShell(Get-Process -Name node -ErrorAction SilentlyContinue)",
+      "PowerShell(netstat -ano)",
+      "PowerShell(Stop-Process -Id 16812 -Force)",
+      "PowerShell(Start-Process -FilePath \"node\" -ArgumentList \"server/index.js\" -WorkingDirectory \"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\" -WindowStyle Hidden)",
+      "PowerShell(Get-Process -Id 8140 | Select-Object Id, ProcessName, Path, MainWindowTitle; \\(Get-Process -Id 8140\\).Modules | Where-Object {$_.ModuleName -eq 'node.exe'} | Select-Object FileName)",
+      "PowerShell(Stop-Process -Id 8140 -Force -ErrorAction SilentlyContinue)",
+      "PowerShell(Start-Sleep -Seconds 3; Invoke-WebRequest -Uri \"http://localhost:3000/css/styles.css\" -UseBasicParsing | Select-Object StatusCode, @{N='ContentType';E={$_.Headers.'Content-Type'}}; Invoke-WebRequest -Uri \"http://localhost:3000/js/api.js\" -UseBasicParsing | Select-Object StatusCode, @{N='ContentType';E={$_.Headers.'Content-Type'}}; Invoke-WebRequest -Uri \"http://localhost:3000/api/jogadores\" -UseBasicParsing | Select-Object StatusCode, @{N='Jogadores';E={\\($_.Content | ConvertFrom-Json\\).Count}})",
+      "PowerShell(Get-Content \"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\public\\\\index.html\" | Select-String -Pattern \"css|js|styles|api|app\" | Where-Object {$_ -match \"href|src\"})"
+    ]
+  }
+}

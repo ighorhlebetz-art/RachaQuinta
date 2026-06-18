@@ -1,0 +1,651 @@
+/* ===== Quinta Categoria F.C. — Tema esportivo preto/dourado ===== */
+
+:root {
+  --preto: #0e0e0e;
+  --preto-card: #1a1a1a;
+  --preto-medio: #2a2a2a;
+  --preto-borda: #333;
+  --dourado: #C9A227;
+  --dourado-acento: #B8860B;
+  --dourado-soft: rgba(201,162,39,0.12);
+  --branco: #F5F1E6;
+  --branco-puro: #ffffff;
+  --cinza: #888;
+  --cinza-claro: #ccc;
+  --perigo: #e05252;
+
+  --time-a-bg: #e8e8e8;
+  --time-a-texto: #1a1a1a;
+  --time-b-bg: #1a1a1a;
+  --time-b-texto: #e8e8e8;
+  --time-c-bg: #C9A227;
+  --time-c-texto: #1a1a1a;
+
+  --radius: 10px;
+  --sombra: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--preto);
+  color: var(--branco);
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, var(--preto) 0%, #111 60%, var(--preto-medio) 100%);
+  border-bottom: 2px solid var(--dourado);
+  padding: 12px 20px;
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.escudo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid var(--dourado);
+}
+.header-text h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--dourado);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.header-text p {
+  font-size: 0.8rem;
+  color: var(--cinza-claro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ===== NAV ===== */
+.nav {
+  background: var(--preto-card);
+  border-bottom: 1px solid var(--preto-borda);
+  display: flex;
+  gap: 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.nav-btn {
+  flex: 1;
+  min-width: 130px;
+  padding: 14px 20px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--cinza);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.nav-btn:hover { color: var(--dourado); }
+.nav-btn.active {
+  color: var(--dourado);
+  border-bottom-color: var(--dourado);
+}
+
+/* ===== MAIN ===== */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* ===== VIEWS ===== */
+.view { display: none; }
+.view.active { display: block; }
+.view-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.view h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dourado);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+.view-header h2 { margin-bottom: 0; }
+
+/* ===== CARDS ===== */
+.form-card {
+  background: var(--preto-card);
+  border: 1px solid var(--preto-borda);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.form-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dourado);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ===== FORMULÁRIOS ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--cinza-claro);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.form-group input,
+.form-group select {
+  background: var(--preto-medio);
+  border: 1px solid var(--preto-borda);
+  border-radius: 6px;
+  color: var(--branco);
+  padding: 9px 12px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group select:focus { border-color: var(--dourado); }
+.form-group select option { background: var(--preto-medio); }
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* ===== SLIDER DE HABILIDADE ===== */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--preto-borda);
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--dourado);
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--dourado);
+  cursor: pointer;
+  border: 2px solid var(--preto);
+  box-shadow: 0 0 4px rgba(201,162,39,0.5);
+}
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--dourado);
+  cursor: pointer;
+  border: 2px solid var(--preto);
+}
+.attr-hint {
+  font-size: 0.68rem;
+  color: var(--cinza);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 4px;
+}
+
+.slider-display {
+  display: inline-block;
+  min-width: 28px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--dourado);
+  background: var(--dourado-soft);
+  border-radius: 6px;
+  padding: 1px 8px;
+  margin-left: 8px;
+}
+
+/* ===== BOTÕES ===== */
+.btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, opacity 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+.btn-gold {
+  background: var(--dourado);
+  color: var(--preto);
+}
+.btn-gold:hover { background: var(--dourado-acento); }
+.btn-ghost {
+  background: transparent;
+  color: var(--cinza-claro);
+  border: 1px solid var(--preto-borda);
+}
+.btn-ghost:hover { border-color: var(--dourado); color: var(--dourado); }
+.btn-danger {
+  background: transparent;
+  color: var(--perigo);
+  border: 1px solid var(--perigo);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+.btn-danger:hover { background: var(--perigo); color: #fff; }
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+}
+.btn-lg {
+  padding: 14px 32px;
+  font-size: 1rem;
+}
+
+/* ===== LISTA DE JOGADORES ===== */
+.jogadores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.jogador-card {
+  background: var(--preto-card);
+  border: 1px solid var(--preto-borda);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+.jogador-card:hover { border-color: var(--dourado); }
+.jogador-card-nome {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--branco);
+}
+.jogador-card-posicao {
+  font-size: 0.75rem;
+  color: var(--dourado);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.posicao-auto-tag {
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: var(--dourado-soft);
+  color: var(--cinza);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.posicao-sec-tag {
+  font-size: 0.72rem;
+  color: var(--cinza);
+  font-weight: 400;
+}
+.jogador-card-notas {
+  display: flex;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--cinza);
+  flex-wrap: wrap;
+}
+.nota-item { display: flex; align-items: center; gap: 3px; }
+.nota-item strong { color: var(--dourado); }
+.jogador-card-acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* ===== SELEÇÃO DE JOGADORES ===== */
+.selecao-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.contador {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--dourado);
+  background: var(--dourado-soft);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.contador.completo { background: rgba(80,180,80,0.15); color: #6ec46e; }
+.selecao-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.selecao-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--preto-medio);
+  border: 1px solid var(--preto-borda);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+}
+.selecao-item:hover { border-color: var(--dourado); }
+.selecao-item.selecionado {
+  background: var(--dourado-soft);
+  border-color: var(--dourado);
+}
+.selecao-item.desabilitado {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.selecao-check {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--cinza);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.selecao-item.selecionado .selecao-check {
+  background: var(--dourado);
+  border-color: var(--dourado);
+  color: var(--preto);
+}
+.selecao-nome { font-size: 0.9rem; font-weight: 600; flex: 1; }
+.selecao-pos {
+  font-size: 0.72rem;
+  color: var(--dourado);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ===== HISTÓRICO ===== */
+.historico-lista { display: flex; flex-direction: column; gap: 10px; }
+.historico-item {
+  background: var(--preto-card);
+  border: 1px solid var(--preto-borda);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.historico-item:hover { border-color: var(--dourado); }
+.historico-info { flex: 1; }
+.historico-nome { font-size: 1rem; font-weight: 700; }
+.historico-data {
+  font-size: 0.8rem;
+  color: var(--cinza);
+  margin-top: 2px;
+}
+.badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.badge-gerado { background: rgba(80,180,80,0.15); color: #6ec46e; }
+.badge-pendente { background: var(--dourado-soft); color: var(--dourado); }
+
+/* ===== RESULTADO ===== */
+.resultado-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.resultado-acoes { display: flex; gap: 10px; flex-wrap: wrap; }
+.times-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* ===== TIME CARD ===== */
+.time-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+.time-card-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.time-camisa {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.time-camisa-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+.time-info-header { flex: 1; }
+.time-nome {
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.time-forca {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 2px;
+  opacity: 0.8;
+}
+.time-card-body { padding: 0 16px 16px; }
+
+.goleiro-linha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.goleiro-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+.posicao-grupo { margin-bottom: 12px; }
+.posicao-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  opacity: 0.6;
+}
+.jogador-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  font-size: 0.88rem;
+}
+.jogador-linha-nome { font-weight: 600; flex: 1; }
+.jogador-linha-forca {
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+.fora-de-posicao-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: rgba(224,82,82,0.2);
+  color: #e05252;
+  margin-left: 6px;
+}
+
+.time-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.7;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== TIME A (Branco) ===== */
+.time-A .time-card-header { background: #d0d0d0; }
+.time-A .time-nome { color: #1a1a1a; }
+.time-A .time-forca { color: #333; }
+.time-A .time-card-body { background: var(--time-a-bg); color: var(--time-a-texto); }
+.time-A .posicao-label { color: #555; }
+.time-A .jogador-linha { background: rgba(0,0,0,0.07); }
+.time-A .goleiro-linha { background: rgba(0,0,0,0.1); }
+.time-A .goleiro-badge { background: rgba(0,0,0,0.15); color: #333; }
+.time-A .time-footer { background: #ccc; color: #333; border-top-color: rgba(0,0,0,0.1); }
+
+/* ===== TIME B (Preto) ===== */
+.time-B .time-card-header { background: #111; }
+.time-B .time-nome { color: #e8e8e8; }
+.time-B .time-forca { color: #aaa; }
+.time-B .time-card-body { background: var(--time-b-bg); color: var(--time-b-texto); }
+.time-B .posicao-label { color: #888; }
+.time-B .jogador-linha { background: rgba(255,255,255,0.05); }
+.time-B .goleiro-linha { background: rgba(255,255,255,0.07); }
+.time-B .goleiro-badge { background: rgba(255,255,255,0.1); color: #aaa; }
+.time-B .time-footer { background: #111; color: #888; border-top-color: rgba(255,255,255,0.05); }
+
+/* ===== TIME C (Dourado) ===== */
+.time-C .time-card-header { background: var(--dourado); }
+.time-C .time-nome { color: #1a1a1a; }
+.time-C .time-forca { color: #333; }
+.time-C .time-card-body { background: #8B6914; color: #fff7e0; }
+.time-C .posicao-label { color: #f0d080; opacity: 1; }
+.time-C .jogador-linha { background: rgba(0,0,0,0.15); }
+.time-C .goleiro-linha { background: rgba(0,0,0,0.2); }
+.time-C .goleiro-badge { background: rgba(0,0,0,0.2); color: #f0d080; }
+.time-C .time-footer { background: #7a5c10; color: #f0d080; border-top-color: rgba(0,0,0,0.15); }
+
+/* ===== UTILITÁRIOS ===== */
+.hidden { display: none !important; }
+.hint {
+  font-size: 0.8rem;
+  color: var(--cinza);
+  margin-bottom: 12px;
+}
+.label-time-a { color: #a0a0a0; }
+.label-time-b { color: #888; }
+.label-time-c { color: var(--dourado); }
+
+.msg-vazio {
+  text-align: center;
+  color: var(--cinza);
+  padding: 48px 20px;
+  font-size: 0.95rem;
+}
+.msg-vazio span { display: block; font-size: 2.5rem; margin-bottom: 12px; }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--preto-card);
+  border: 1px solid var(--preto-borda);
+  border-left: 4px solid var(--dourado);
+  color: var(--branco);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  box-shadow: var(--sombra);
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+  max-width: 320px;
+}
+.toast.erro { border-left-color: var(--perigo); }
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 600px) {
+  .times-grid { grid-template-columns: 1fr; }
+  .header-text h1 { font-size: 1.1rem; }
+  .nav-btn { min-width: 100px; font-size: 0.8rem; padding: 12px 10px; }
+}
