@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const q = require('../db/queries/jogadores');
 
 const POSICOES_VALIDAS = new Set(['zagueiro', 'meia', 'atacante', 'goleiro']);
 
 function validarPosicao(val, campo) {
-  if (!val || val === '') return null; // opcional: aceita vazio/null
+  if (!val || val === '') return null;
   if (!POSICOES_VALIDAS.has(val)) return `${campo} deve ser "zagueiro", "meia", "atacante" ou "goleiro".`;
   return null;
 }
@@ -53,56 +53,74 @@ function validar(body) {
   return null;
 }
 
-router.get('/', (req, res) => {
-  const jogadores = db.prepare('SELECT * FROM jogadores ORDER BY nome COLLATE NOCASE').all();
-  res.json(jogadores);
+router.get('/', async (req, res) => {
+  try {
+    res.json(await q.listarJogadores());
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao buscar jogadores.' });
+  }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const erro = validar(req.body);
   if (erro) return res.status(400).json({ erro });
 
   const { nome, fisico, ataque, defesa, tecnica, tatica, velocidade,
           posicao_principal, posicao_secundaria, posicao_terciaria } = req.body;
 
-  const info = db.prepare(`
-    INSERT INTO jogadores (nome, fisico, ataque, defesa, tecnica, tatica, velocidade,
-                           posicao_principal, posicao_secundaria, posicao_terciaria)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(nome.trim(), +fisico, +ataque, +defesa, +tecnica, +tatica, +velocidade,
-         posicao_principal || null, posicao_secundaria || null, posicao_terciaria || null);
-
-  res.status(201).json(db.prepare('SELECT * FROM jogadores WHERE id = ?').get(info.lastInsertRowid));
+  try {
+    const jogador = await q.criarJogador({
+      nome: nome.trim(),
+      fisico: +fisico, ataque: +ataque, defesa: +defesa,
+      tecnica: +tecnica, tatica: +tatica, velocidade: +velocidade,
+      posicao_principal: posicao_principal || null,
+      posicao_secundaria: posicao_secundaria || null,
+      posicao_terciaria: posicao_terciaria || null,
+    });
+    res.status(201).json(jogador);
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao criar jogador.' });
+  }
 });
 
-router.put('/:id', (req, res) => {
-  if (!db.prepare('SELECT id FROM jogadores WHERE id = ?').get(req.params.id))
-    return res.status(404).json({ erro: 'Jogador não encontrado.' });
+router.put('/:id', async (req, res) => {
+  try {
+    if (!await q.buscarJogador(req.params.id))
+      return res.status(404).json({ erro: 'Jogador não encontrado.' });
 
-  const erro = validar(req.body);
-  if (erro) return res.status(400).json({ erro });
+    const erro = validar(req.body);
+    if (erro) return res.status(400).json({ erro });
 
-  const { nome, fisico, ataque, defesa, tecnica, tatica, velocidade,
-          posicao_principal, posicao_secundaria, posicao_terciaria } = req.body;
+    const { nome, fisico, ataque, defesa, tecnica, tatica, velocidade,
+            posicao_principal, posicao_secundaria, posicao_terciaria } = req.body;
 
-  db.prepare(`
-    UPDATE jogadores
-    SET nome=?, fisico=?, ataque=?, defesa=?, tecnica=?, tatica=?, velocidade=?,
-        posicao_principal=?, posicao_secundaria=?, posicao_terciaria=?
-    WHERE id=?
-  `).run(nome.trim(), +fisico, +ataque, +defesa, +tecnica, +tatica, +velocidade,
-         posicao_principal || null, posicao_secundaria || null, posicao_terciaria || null,
-         req.params.id);
-
-  res.json(db.prepare('SELECT * FROM jogadores WHERE id = ?').get(req.params.id));
+    const jogador = await q.atualizarJogador(req.params.id, {
+      nome: nome.trim(),
+      fisico: +fisico, ataque: +ataque, defesa: +defesa,
+      tecnica: +tecnica, tatica: +tatica, velocidade: +velocidade,
+      posicao_principal: posicao_principal || null,
+      posicao_secundaria: posicao_secundaria || null,
+      posicao_terciaria: posicao_terciaria || null,
+    });
+    res.json(jogador);
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao atualizar jogador.' });
+  }
 });
 
-router.delete('/:id', (req, res) => {
-  if (!db.prepare('SELECT id FROM jogadores WHERE id = ?').get(req.params.id))
-    return res.status(404).json({ erro: 'Jogador não encontrado.' });
+router.delete('/:id', async (req, res) => {
+  try {
+    if (!await q.buscarJogador(req.params.id))
+      return res.status(404).json({ erro: 'Jogador não encontrado.' });
 
-  db.prepare('DELETE FROM jogadores WHERE id = ?').run(req.params.id);
-  res.json({ ok: true });
+    if (await q.jogadorEmRacha(req.params.id))
+      return res.status(400).json({ erro: 'Não é possível excluir este jogador pois ele está associado a um ou mais rachas.' });
+
+    await q.deletarJogador(req.params.id);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao excluir jogador.' });
+  }
 });
 
 module.exports = router;
