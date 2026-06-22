@@ -32,7 +32,8 @@
       "PowerShell(Get-Process -Id 8140 | Select-Object Id, ProcessName, Path, MainWindowTitle; \\(Get-Process -Id 8140\\).Modules | Where-Object {$_.ModuleName -eq 'node.exe'} | Select-Object FileName)",
       "PowerShell(Stop-Process -Id 8140 -Force -ErrorAction SilentlyContinue)",
       "PowerShell(Start-Sleep -Seconds 3; Invoke-WebRequest -Uri \"http://localhost:3000/css/styles.css\" -UseBasicParsing | Select-Object StatusCode, @{N='ContentType';E={$_.Headers.'Content-Type'}}; Invoke-WebRequest -Uri \"http://localhost:3000/js/api.js\" -UseBasicParsing | Select-Object StatusCode, @{N='ContentType';E={$_.Headers.'Content-Type'}}; Invoke-WebRequest -Uri \"http://localhost:3000/api/jogadores\" -UseBasicParsing | Select-Object StatusCode, @{N='Jogadores';E={\\($_.Content | ConvertFrom-Json\\).Count}})",
-      "PowerShell(Get-Content \"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\public\\\\index.html\" | Select-String -Pattern \"css|js|styles|api|app\" | Where-Object {$_ -match \"href|src\"})"
+      "PowerShell(Get-Content \"c:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\\\\public\\\\index.html\" | Select-String -Pattern \"css|js|styles|api|app\" | Where-Object {$_ -match \"href|src\"})",
+      "PowerShell(cd \"C:\\\\Users\\\\ighor.hribeiro\\\\Desktop\\\\Racha de Quinta\"; git diff --stat 2>&1; Write-Host \"---\"; \\(Select-String -Path \"server\\\\db.js\" -Pattern \"posicao_principal\"\\).Count; \\(Select-String -Path \"server\\\\balancer.js\" -Pattern \"forcaEfetiva\"\\).Count)"
     ]
   }
 }
